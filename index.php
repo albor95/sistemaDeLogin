@@ -12,8 +12,15 @@
   </head>
   <body class="bg-dark">
       <main class="container mt-4">
-          <h1>Daew mundu!</h1>
-    
+          <section class="row">
+              <div class="col-lg-4 offset-lg-4" id="alerta">
+                  <div class="alert alert-success text-center">
+                      <strong id="resultado">
+                          DAEW BOOTSTRAP!
+                      </strong>
+                  </div>
+              </div>
+          </section>
       </main>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
