@@ -5,4 +5,4 @@ Aula de web criaçao de sistema de login
 leiaute bootstrap
 
 ## aula02- 13 de junho 2019
-formularios e **validação**
+formularios e ~~validação~~
