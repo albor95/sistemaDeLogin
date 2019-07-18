@@ -25,7 +25,7 @@ if(isset($_POST['action'])
          //Usuario e senha corretos
          $_SESSION['nomeUsuario']=$nomeUsuário;
          echo 'ok';
-         if(!empty($_POST['checkLembrar'])){
+         if(!empty($_POST['lembrar'])){
              setcookie('nomeUsuario',$nomeUsuário,time()+(365*24*60*60));
              setcookie('senhaUsuario',$senha, time()+(365*24*60*60));//1ano em segundos
          }else{
@@ -46,7 +46,7 @@ if(isset($_POST['action'])
     $senhaUsuário = verificar_entrada($_POST['senhaUsuario']);
     $senhaUsuárioConfirmar =
  verificar_entrada($_POST['senhaUsuarioConfirmar']);
-    $criado = date("Y-m-d"); //Cria uma data Ano-mês-dia
+    $criado = date("Y-m-d H:i:s"); //Cria uma data Ano-mês-dia
     
     //Gerar um hash para as senhas
     $senha = sha1($senhaUsuário);
