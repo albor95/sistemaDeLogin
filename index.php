@@ -53,7 +53,11 @@ if(isset($_SESSION['nomeUsuario']))
                           <input type="text" name="nomeUsuario"
                                  class="form-control"
                                  placeholder="Nome do usuário"
-                                 required minlength="5">
+                                 required minlength="5"
+                                 value="<?php 
+                                 isset($_COOKIE['nomeUsuario'])?
+                                 $_COOKIE['nomeUsuario']
+                                 :"";?>">
                       </div>
                       
                       <div class="form-group">
@@ -61,14 +65,18 @@ if(isset($_SESSION['nomeUsuario']))
                                  name="senhaUsuario"
                                  class="form-control"
                                  placeholder="Senha"
-                                 required minlength="6">
+                                 required minlength="6"
+                                 value="<?php if(isset($_COOKIE['senhaUsuario']))
+                                     {echo$_COOKIE['senhaUsuario'];}?>">
                       </div>
                       
                       <div class="form-group mt-5">
                           <div class="custom-control custom-checkbox">
                               <input type="checkbox" name="lembrar"
                                      id="checkLembrar" 
-                                     class="custom-control-input">
+                                     class="custom-control-input" 
+                                      <?php if(isset($_COOKIE['senhaUsuario']))
+                                     {echo 'checked';}?>>
                               <label for="checkLembrar" 
                                      class="custom-control-label">
                                   Lembrar de mim.

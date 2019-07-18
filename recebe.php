@@ -27,7 +27,7 @@ if(isset($_POST['action'])
          echo 'ok';
          if(!empty($_POST['lembrar'])){
              setcookie('nomeUsuario',$nomeUsuário,time()+(365*24*60*60));
-             setcookie('senhaUsuario',$senha, time()+(365*24*60*60));//1ano em segundos
+             setcookie('senhaUsuario',$senhaUsuário, time()+(365*24*60*60));//1ano em segundos
          }else{
              //limpa o cookie
              if(isset($_COOKIE['nomeUsuario']))
