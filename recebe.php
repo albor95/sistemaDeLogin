@@ -87,5 +87,8 @@ if(isset($_POST['action'])
                 echo "Algo deu errado. Por favor, tente novamente.";            
         }
     }
+}elseif(isset($_POST['action']) 
+        && $_POST['action'] == 'gerar'){
+   $emailGerarSenha= verificar_entrada($_POST['emailGerarSenha']);
 }else 
     header("localhost:index.php");//redireciona ao acessar este arquivo diretamente. Só funca se n aparece nada
