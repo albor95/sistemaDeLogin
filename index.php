@@ -20,7 +20,8 @@ if(isset($_SESSION['nomeUsuario']))
     <style>
         #alerta,
         #caixaRegistro,
-        #caixaSenha{
+        #caixaSenha,
+        #espera{
             display: none;
         }  
     </style>
@@ -38,7 +39,12 @@ if(isset($_SESSION['nomeUsuario']))
                   </div>
               </div>
           </section>
-          
+          <!--SPINNER-->
+          <div class="col-lg-4 offset-lg-4 text-center mb-4">
+              <div class="spinner-border text-primary" role="status" id="espera">
+            <span class="sr-only">Esperando...</span>
+          </div>
+          </div>>
           <!-- Formulário de Login -->
           <section class="row">
               <div class="col-lg-4 offset-lg-4 bg-light rounded"
@@ -57,7 +63,7 @@ if(isset($_SESSION['nomeUsuario']))
                                  value="<?php 
                                  isset($_COOKIE['nomeUsuario'])?
                                  $_COOKIE['nomeUsuario']
-                                 :"";?>">
+                                 :"" ?>">
                       </div>
                       
                       <div class="form-group">
@@ -75,8 +81,11 @@ if(isset($_SESSION['nomeUsuario']))
                               <input type="checkbox" name="lembrar"
                                      id="checkLembrar" 
                                      class="custom-control-input" 
-                                      <?php if(isset($_COOKIE['senhaUsuario']))
-                                     {echo 'checked';}?>>
+                                      <?php 
+                                      isset($_COOKIE['senhaUsuario'])?
+                                     'checked'
+                                      :""?>>
+                              
                               <label for="checkLembrar" 
                                      class="custom-control-label">
                                   Lembrar de mim.
@@ -298,12 +307,14 @@ if(isset($_SESSION['nomeUsuario']))
                         .checkValidity()){
                     //Não deixa o formulário ser enviado    
                     e.preventDefault();
+                    $("#espera").show();
                     $.ajax({
                         url: 'recebe.php',
                         method: 'post',
                         data:$('#formRegistro')
                                 .serialize()+'&action=registro',
                         success:function(resposta){
+                            $("#espera").hide();
                             $('#alerta').show();
                             $('#resultado').html(resposta);
                         }                    
@@ -321,6 +332,7 @@ if(isset($_SESSION['nomeUsuario']))
                         .checkValidity()){
                     //Não deixa o formulário ser enviado    
                     e.preventDefault();
+                     $("#espera").show();
                     $.ajax({
                         url: 'recebe.php',
                         method: 'post',
@@ -328,6 +340,7 @@ if(isset($_SESSION['nomeUsuario']))
                                 .serialize()+'&action=entrar',
                         success:function(resposta){
                             if(resposta==="ok"){
+                                 $("#espera").hide();
                                 window.location="perfil.php";
                             }else{
                                  $('#alerta').show();
@@ -350,12 +363,14 @@ if(isset($_SESSION['nomeUsuario']))
                         .checkValidity()){
                     //Não deixa o formulário ser enviado    
                     e.preventDefault();
+                     $("#espera").show();
                     $.ajax({
                         url: 'recebe.php',
                         method: 'post',
                         data:$('#formSenha')
                                 .serialize()+'&action=gerar',
                         success:function(resposta){
+                             $("#espera").hide();
                             $('#alerta').show();
                             $('#resultado').html(resposta);
                         }                    
