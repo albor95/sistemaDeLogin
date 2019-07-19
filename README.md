@@ -16,3 +16,7 @@ dados com Ajax. ~~Recepção com PHP~~
 
 ## aula05 - 08 de julho de 2019
 Cadastro de usuário no banco de dados
+
+## aula07 - 18 de julho de 2019
+
+sessao e cookie funcionado, prep para recuperar senha
