@@ -90,5 +90,27 @@ if(isset($_POST['action'])
 }elseif(isset($_POST['action']) 
         && $_POST['action'] == 'gerar'){
    $emailGerarSenha= verificar_entrada($_POST['emailGerarSenha']);
+   
+   $sql=$conexão->prepare("Select idUsuario from usuario where email=?");
+   $sql->bind_param("s",$emailGerarSenha);
+   $sql->execute();
+   $resposta= $sql->get_result();
+   if($resposta->num_rows>0){
+      
+       #geração do token 10 chars random
+       $frase="minharola3,78cm";
+       $palavra_secreta= str_shuffle($frase);
+       $token= substr($palavra_secreta, 0, 10);
+       #update BD token e validade
+       $sql= $conexão->prepare("update usuario set token=?, tokenExpirado=DATE_ADD(now(), INTERVAL 5 MINUTE) WHERE email=?;");
+       $sql->bind_param("ss", $token,$emailGerarSenha);
+       $sql->execute();
+       #simuelação do link por e-mail o cod deve ser enviado
+       
+       $link="<p><a href='http://localhost:8080/sistemaDeLogin/gerarSenha.php?email=$emailGerarSenha&token=$token'>Clique aqui</a> para  gerar uma nova senha.</p>";
+       echo $link;
+   }else{
+       echo "<strong class='text-danger'>E-mail não encontardo</strong>";
+   }
 }else 
     header("localhost:index.php");//redireciona ao acessar este arquivo diretamente. Só funca se n aparece nada
